@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Jukebox_Assignment_SB.Properties
+namespace jukebox_assignment_SB.Properties
 {
 
 

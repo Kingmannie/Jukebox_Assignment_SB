@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Jukebox_Assignment_SB")]
+[assembly: AssemblyTitle("jukebox_assignment_SB")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Jukebox_Assignment_SB")]
+[assembly: AssemblyProduct("jukebox_assignment_SB")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("15ae4c5d-da6f-4007-a3ec-0c14df81da98")]
+[assembly: Guid("d5a4adec-84d3-48c9-a271-3f1abe9c2bcd")]
 
 // Version information for an assembly consists of the following four values:
 //

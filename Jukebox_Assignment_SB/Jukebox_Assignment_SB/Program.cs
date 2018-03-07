@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Jukebox_Assignment_SB
+namespace jukebox_assignment_SB
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Jukebox_Assignment_SB
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new frm_Jukebox());
         }
     }
 }
