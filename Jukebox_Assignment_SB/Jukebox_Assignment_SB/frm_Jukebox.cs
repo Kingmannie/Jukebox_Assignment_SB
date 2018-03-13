@@ -44,29 +44,38 @@ namespace jukebox_assignment_SB
             
             StreamReader myInputStream = File.OpenText(configPath + "Config.txt");
 
-            //initiate empty arrays, ready to receive information
-            
-            string[] Tracks_Array = new string[0];
+            //empty string container
+            String num_gen = "";
+            String num_track = "";
 
-            //int num_gen = myInputStream.ReadLine();
+            //capture first line of data from the config file
+            num_gen = myInputStream.ReadLine();
 
-            string[] Genre_Array = new string[0];
+            //ListBox Media_Library(Convert.ToInt16(num_gen));
 
-            for (int genre = 0; genre < 3; genre++) //loop to define genre - 3 genres
+            //create a new instance of listbox
+            ListBox Genre_List = new ListBox();
+
+            //add the number from the config to it
+            Genre_List.Items.Add(num_gen);
+
+            //loop to define genre - 3 genres
+            for (int gen = 1; gen < Convert.ToInt16(num_gen); gen++) 
             {
-                //Create string[] Tracks_Array = new string[0];
-                for (int track = 0; track < 3; track++)
+                //create new instance of Genre_List for each gen increment
+                Genre_List.Items[gen] = new ListBox();
+                num_track = myInputStream.ReadLine();//number of tracks in config
+                Genre_List.Items[gen].Add(myInputStream.ReadLine());//title
+                
+                for (int track = 1; track < Convert.ToInt16(num_track); track++)
                 { //loop to define tracks
-
+                    Genre_List.Items[gen].Add(myInputStream.ReadLine());
                 }
             }
 
-            //while (line != null)
-            //{
-
-            //fill array
-            //line = config_Input_Reader.ReadLine();
-            //}
+            //after populating the arrays - display on form
+            txt_Genre_Title.Text = Media_Library.Items[0].ToString();
+            
         }
 
         private void hscr_Selector_Scroll(object sender, ScrollEventArgs e)
@@ -81,7 +90,8 @@ namespace jukebox_assignment_SB
 
         private void txt_Genre_Title_TextChanged(object sender, EventArgs e)
         {
-            //txt_Genre_Title = Genre_Array[0];
+            
+            
         }
 
         private void txt_Presently_Playing_TextChanged(object sender, EventArgs e)
