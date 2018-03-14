@@ -51,36 +51,45 @@ namespace jukebox_assignment_SB
             //capture first line of data from the config file
             num_gen = myInputStream.ReadLine();
 
-            //ListBox Media_Library(Convert.ToInt16(num_gen));
-
             //create a new instance of listbox
-            ListBox Genre_List = new ListBox();
+            String[] Genre_List = new String[Convert.ToInt16(num_gen)];
+            Genre_List[0] = "1";
+            Genre_List[1] = "2";
+            Genre_List[2] = "3";
 
+
+            //List<string> Genre_List[Convert.ToInt16(num_gen)] = new List<string>();
+            //ListBox Genre_List[new int Convert.ToInt16(num_gen)] = new ListBox();
             //add the number from the config to it
-            Genre_List.Items.Add(num_gen);
+            //Genre_List.Items.Add(num_gen);
 
             //loop to define genre - 3 genres
-            for (int gen = 1; gen < Convert.ToInt16(num_gen); gen++) 
+            for (int gen = 0; gen < Convert.ToInt16(num_gen); gen++) 
             {
                 //create new instance of Genre_List for each gen increment
-                Genre_List.Items[gen] = new ListBox();
+                //Genre_List.Items[gen] = new ListBox();
                 num_track = myInputStream.ReadLine();//number of tracks in config
-                Genre_List.Items[gen].Add(myInputStream.ReadLine());//title
-                
-                for (int track = 1; track < Convert.ToInt16(num_track); track++)
-                { //loop to define tracks
-                    Genre_List.Items[gen].Add(myInputStream.ReadLine());
-                }
+                //Genre_List.Items[gen] =  myInputStream.ReadLine();//store title in array
+                //listBox1.Items.Add(MyList.ElementAt(i));
+
+                //for (int track = 0; track < Convert.ToInt16(num_track); track++)
+                //{ //loop to define tracks
+                    //Genre_List.Items[track] = myInputStream.ReadLine();//store tracks in array
+                //}
             }
 
             //after populating the arrays - display on form
-            txt_Genre_Title.Text = Media_Library.Items[0].ToString();
-            
+            //txt_Genre_Title.Text = Genre_List.Items[0].ToString();
+            //txt_Genre_Title
+            //lst_Genre_List
         }
 
-        private void hscr_Selector_Scroll(object sender, ScrollEventArgs e)
+        public void hscr_Selector_Scroll(object sender, ScrollEventArgs e)
         {
 
+
+
+            txt_Genre_Title.Text = hscr_Selector.Value.ToString();
         }
 
         private void lst_Genre_List_SelectedIndexChanged(object sender, EventArgs e)
