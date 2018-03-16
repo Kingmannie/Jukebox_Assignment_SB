@@ -86,5 +86,10 @@ namespace jukebox_assignment_SB
         {
 
         }
+
+        private void frm_Setup_Window_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

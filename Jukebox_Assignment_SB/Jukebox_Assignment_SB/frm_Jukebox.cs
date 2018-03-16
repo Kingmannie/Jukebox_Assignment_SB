@@ -21,8 +21,8 @@ namespace jukebox_assignment_SB
         //initialise listbox array globally
         ListBox[] Genre_List;
 
-        //empty string container
-        String next_line = "";
+        //exclusive genre value
+        String num_genres = "";
 
         public void frm_Jukebox_Load(object sender, EventArgs e)
         {
@@ -51,16 +51,16 @@ namespace jukebox_assignment_SB
             StreamReader myInputStream = File.OpenText(configPath + "Config.txt");
 
             //capture first line of data from the config file
-            next_line = myInputStream.ReadLine();
+            num_genres = myInputStream.ReadLine();
 
             String num_track = "";
 
             //create a new instance of listbox
             //array index value is converted string from config file.
-            Genre_List = new ListBox[Convert.ToInt16(next_line)];
+            Genre_List = new ListBox[Convert.ToInt16(num_genres)];
 
             //loop to define genre - (3 genres as default) 
-            for (int gen = 0; gen < Convert.ToInt16(next_line); gen++)
+            for (int gen = 0; gen < Convert.ToInt16(num_genres); gen++)
             {
                 //create new instance of Genre_List for each gen increment
                 Genre_List[Convert.ToInt16(gen)] = new ListBox();
@@ -75,36 +75,64 @@ namespace jukebox_assignment_SB
                 }
             }
 
-            //gotcha
-            //txt_Genre_Title.Text = Genre_List[0].Items[1].ToString();
-
-            //after populating the arrays - display on form
+            //default title - first genre
+            txt_Genre_Title.Text = Genre_List[0].Items[0].ToString();
 
             //lst_Genre_List
             //txt_Genre_Title.Text
 
             myInputStream.Close();
+
         }
 
+        //empty string container
+        
 
-        private void hscr_Selector_Scroll(object sender, ScrollEventArgs e)
+        public void hscr_Selector_Scroll(object sender, ScrollEventArgs e)
         {
-            string configPath = Directory.GetCurrentDirectory() + "\\";
+            //make scroll bar maximum size of number of genres
+            hscr_Selector.Maximum = Convert.ToInt16(num_genres);
+            //minimum is 0
+            hscr_Selector.Minimum = 0;
+            hscr_Selector.Value = 0;
 
-            StreamReader myInputStream = File.OpenText(configPath + "Config.txt");
+            //properties small change and large change are both 1 - to stop it from over shooting the array index
+            if ((hscr_Selector.Value >= 0) && (hscr_Selector.Value <= Convert.ToInt16(num_genres)))
+            {
+                txt_Genre_Title.Text = Genre_List[hscr_Selector.Value += 1].Items[0].ToString();
 
+            }
             
 
-            //txt_Genre_Title.Text = Genre_List[hscr_Selector.Value].Text.ToString();
-
-            //potentially search document here
-            //for (int i = 0; i < Convert.ToInt16(Genre_List[0]); i++)
+            //while ((hscr_Selector.Value > 0) && (hscr_Selector.Value < Convert.ToInt16(num_genres)))
             //{
-            //hscr_Selector.Value += i;
-            //txt_Genre_Title.Text = Genre_List[hscr_Selector.Value].Text.ToString();
-            //txt_Genre_Title.Text = hscr_Selector.Value.ToString();
-            //}
-            myInputStream.Close();
+            //    if (hscr_Selector. == true)
+            //    {
+
+                //    }
+                //}
+                //the value is stored in the array correctly - just need to show
+
+                //if (hscr_Selector.Value
+
+
+                //hscr_Selector.Value = Convert.ToInt16(num_genres);
+
+                //Genre_List[2].Items[0].ToString()
+
+                //cycle titles in textbox
+
+
+                //txt_Genre_Title.Text = Genre_List[hscr_Selector.Value].Text.ToString();
+
+                //potentially search document here
+                //for (int i = 0; i < Convert.ToInt16(Genre_List[0]); i++)
+                //{
+                //hscr_Selector.Value += i;
+                //txt_Genre_Title.Text = Genre_List[hscr_Selector.Value].Text.ToString();
+                //txt_Genre_Title.Text = hscr_Selector.Value.ToString();
+                //}
+
         }
 
         private void lst_Genre_List_SelectedIndexChanged(object sender, EventArgs e)
@@ -112,10 +140,10 @@ namespace jukebox_assignment_SB
 
         }
 
-        private void txt_Genre_Title_TextChanged(object sender, EventArgs e)
+        public void txt_Genre_Title_TextChanged(object sender, EventArgs e)
         {
-            
-            
+            //txt_Genre_Title.Text = Genre_List[0].Items[0].ToString();
+
         }
 
         private void txt_Presently_Playing_TextChanged(object sender, EventArgs e)
@@ -130,12 +158,16 @@ namespace jukebox_assignment_SB
 
         private void btn_Setup_Click(object sender, EventArgs e)
         {
+            //txt_Genre_Title.Text = Genre_List[0].Items[0].ToString();
+            var frm_Setup_Window = new frm_Setup_Window();
+            frm_Setup_Window.Show();
 
         }
 
         private void btn_About_Click(object sender, EventArgs e)
         {
-            
+            var frm_About = new frm_About();
+            frm_About.Show();
         }
 
         private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)

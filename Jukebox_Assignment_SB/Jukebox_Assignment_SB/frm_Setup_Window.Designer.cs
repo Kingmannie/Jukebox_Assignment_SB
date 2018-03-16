@@ -36,6 +36,10 @@
             this.btn_Move_Track = new System.Windows.Forms.Button();
             this.btn_Copy_Track = new System.Windows.Forms.Button();
             this.grpbx_Present_Genre_Track_List = new System.Windows.Forms.GroupBox();
+            this.btn_Genre_Next = new System.Windows.Forms.Button();
+            this.btn_Genre_Delete = new System.Windows.Forms.Button();
+            this.btn_Genre_Add = new System.Windows.Forms.Button();
+            this.btn_Genre_Previous = new System.Windows.Forms.Button();
             this.txt_Genre_Title = new System.Windows.Forms.TextBox();
             this.lbl_Genre = new System.Windows.Forms.Label();
             this.lst_Playlist = new System.Windows.Forms.ListBox();
@@ -43,10 +47,6 @@
             this.btn_Clear_Imported_Tracks = new System.Windows.Forms.Button();
             this.btn_Import_Tracks = new System.Windows.Forms.Button();
             this.lst_Imported_Tracks = new System.Windows.Forms.ListBox();
-            this.btn_Genre_Previous = new System.Windows.Forms.Button();
-            this.btn_Genre_Add = new System.Windows.Forms.Button();
-            this.btn_Genre_Delete = new System.Windows.Forms.Button();
-            this.btn_Genre_Next = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.grpbx_Present_Genre_Track_List.SuspendLayout();
             this.grpbx_Imported_Tracks.SuspendLayout();
@@ -132,6 +132,46 @@
             this.grpbx_Present_Genre_Track_List.TabStop = false;
             this.grpbx_Present_Genre_Track_List.Text = "Present Genre Track List";
             // 
+            // btn_Genre_Next
+            // 
+            this.btn_Genre_Next.Location = new System.Drawing.Point(177, 354);
+            this.btn_Genre_Next.Name = "btn_Genre_Next";
+            this.btn_Genre_Next.Size = new System.Drawing.Size(93, 61);
+            this.btn_Genre_Next.TabIndex = 6;
+            this.btn_Genre_Next.Text = "Next >>";
+            this.btn_Genre_Next.UseVisualStyleBackColor = true;
+            this.btn_Genre_Next.Click += new System.EventHandler(this.btn_Genre_Next_Click);
+            // 
+            // btn_Genre_Delete
+            // 
+            this.btn_Genre_Delete.Location = new System.Drawing.Point(105, 392);
+            this.btn_Genre_Delete.Name = "btn_Genre_Delete";
+            this.btn_Genre_Delete.Size = new System.Drawing.Size(66, 23);
+            this.btn_Genre_Delete.TabIndex = 5;
+            this.btn_Genre_Delete.Text = "Delete";
+            this.btn_Genre_Delete.UseVisualStyleBackColor = true;
+            this.btn_Genre_Delete.Click += new System.EventHandler(this.btn_Genre_Delete_Click);
+            // 
+            // btn_Genre_Add
+            // 
+            this.btn_Genre_Add.Location = new System.Drawing.Point(105, 353);
+            this.btn_Genre_Add.Name = "btn_Genre_Add";
+            this.btn_Genre_Add.Size = new System.Drawing.Size(66, 23);
+            this.btn_Genre_Add.TabIndex = 4;
+            this.btn_Genre_Add.Text = "Add";
+            this.btn_Genre_Add.UseVisualStyleBackColor = true;
+            this.btn_Genre_Add.Click += new System.EventHandler(this.btn_Genre_Add_Click);
+            // 
+            // btn_Genre_Previous
+            // 
+            this.btn_Genre_Previous.Location = new System.Drawing.Point(6, 354);
+            this.btn_Genre_Previous.Name = "btn_Genre_Previous";
+            this.btn_Genre_Previous.Size = new System.Drawing.Size(93, 61);
+            this.btn_Genre_Previous.TabIndex = 3;
+            this.btn_Genre_Previous.Text = "<< Previous";
+            this.btn_Genre_Previous.UseVisualStyleBackColor = true;
+            this.btn_Genre_Previous.Click += new System.EventHandler(this.btn_Genre_Previous_Click);
+            // 
             // txt_Genre_Title
             // 
             this.txt_Genre_Title.BackColor = System.Drawing.SystemColors.Control;
@@ -203,46 +243,6 @@
             this.lst_Imported_Tracks.Size = new System.Drawing.Size(277, 329);
             this.lst_Imported_Tracks.TabIndex = 0;
             this.lst_Imported_Tracks.SelectedIndexChanged += new System.EventHandler(this.lst_Imported_Tracks_SelectedIndexChanged);
-            // 
-            // btn_Genre_Previous
-            // 
-            this.btn_Genre_Previous.Location = new System.Drawing.Point(6, 354);
-            this.btn_Genre_Previous.Name = "btn_Genre_Previous";
-            this.btn_Genre_Previous.Size = new System.Drawing.Size(93, 61);
-            this.btn_Genre_Previous.TabIndex = 3;
-            this.btn_Genre_Previous.Text = "<< Previous";
-            this.btn_Genre_Previous.UseVisualStyleBackColor = true;
-            this.btn_Genre_Previous.Click += new System.EventHandler(this.btn_Genre_Previous_Click);
-            // 
-            // btn_Genre_Add
-            // 
-            this.btn_Genre_Add.Location = new System.Drawing.Point(105, 353);
-            this.btn_Genre_Add.Name = "btn_Genre_Add";
-            this.btn_Genre_Add.Size = new System.Drawing.Size(66, 23);
-            this.btn_Genre_Add.TabIndex = 4;
-            this.btn_Genre_Add.Text = "Add";
-            this.btn_Genre_Add.UseVisualStyleBackColor = true;
-            this.btn_Genre_Add.Click += new System.EventHandler(this.btn_Genre_Add_Click);
-            // 
-            // btn_Genre_Delete
-            // 
-            this.btn_Genre_Delete.Location = new System.Drawing.Point(105, 392);
-            this.btn_Genre_Delete.Name = "btn_Genre_Delete";
-            this.btn_Genre_Delete.Size = new System.Drawing.Size(66, 23);
-            this.btn_Genre_Delete.TabIndex = 5;
-            this.btn_Genre_Delete.Text = "Delete";
-            this.btn_Genre_Delete.UseVisualStyleBackColor = true;
-            this.btn_Genre_Delete.Click += new System.EventHandler(this.btn_Genre_Delete_Click);
-            // 
-            // btn_Genre_Next
-            // 
-            this.btn_Genre_Next.Location = new System.Drawing.Point(177, 354);
-            this.btn_Genre_Next.Name = "btn_Genre_Next";
-            this.btn_Genre_Next.Size = new System.Drawing.Size(93, 61);
-            this.btn_Genre_Next.TabIndex = 6;
-            this.btn_Genre_Next.Text = "Next >>";
-            this.btn_Genre_Next.UseVisualStyleBackColor = true;
-            this.btn_Genre_Next.Click += new System.EventHandler(this.btn_Genre_Next_Click);
             // 
             // frm_Setup_Window
             // 

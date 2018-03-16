@@ -81,6 +81,7 @@
             // 
             // hscr_Selector
             // 
+            this.hscr_Selector.LargeChange = 1;
             this.hscr_Selector.Location = new System.Drawing.Point(95, 273);
             this.hscr_Selector.Name = "hscr_Selector";
             this.hscr_Selector.Size = new System.Drawing.Size(255, 24);
