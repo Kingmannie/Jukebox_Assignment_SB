@@ -22,14 +22,17 @@ namespace jukebox_assignment_SB
         ListBox[] Genre_List;
 
         //exclusive genre value
-        String num_genres = "";
+        Int16 num_genres;
+
+        //First, find and store the directory of the config folder
+        string configPath = Directory.GetCurrentDirectory() + "\\";
+
+        //tells us if the jukebox is playing or not
+        //bool isPlaying = false;
 
         public void frm_Jukebox_Load(object sender, EventArgs e)
         {
             //on form load, need to create the config file.
-            //First, find and store the directory of the config folder
-            string configPath = Directory.GetCurrentDirectory() + "\\";
-
             StreamWriter myOutputStream = File.CreateText(configPath + "Config.txt");
 
             //write the config file to build the initial structure for our config file.
@@ -51,27 +54,25 @@ namespace jukebox_assignment_SB
             StreamReader myInputStream = File.OpenText(configPath + "Config.txt");
 
             //capture first line of data from the config file
-            num_genres = myInputStream.ReadLine();
+            num_genres = Convert.ToInt16(myInputStream.ReadLine());
 
-            String num_track = "";
+            //small int to store number of tracks
+            Int16 num_track;
 
             //create a new instance of listbox
             //array index value is converted string from config file.
-            Genre_List = new ListBox[Convert.ToInt16(num_genres)];
+            Genre_List = new ListBox[num_genres];
 
             //loop to define genre - (3 genres as default) 
-            for (int gen = 0; gen < Convert.ToInt16(num_genres); gen++)
+            for (int gen = 0; gen < num_genres; gen++)
             {
-                //create new instance of Genre_List for each gen increment
-                Genre_List[Convert.ToInt16(gen)] = new ListBox();
-                num_track = myInputStream.ReadLine();//number of tracks in config
-                Genre_List[Convert.ToInt16(gen)].Items.Add(myInputStream.ReadLine());//store title in array
-                //txt_Genre_Title.Text = Genre_List[gen].Text.ToString();
+                Genre_List[gen] = new ListBox();//create new instance of Genre_List for each gen increment
+                num_track = Convert.ToInt16(myInputStream.ReadLine());//number of tracks in config
+                Genre_List[gen].Items.Add(myInputStream.ReadLine());//store title in array
                 
-                for (int track = 0; track < Convert.ToInt32(num_track); track++)
-                { //loop to define tracks
-                    Genre_List[Convert.ToInt16(gen)].Items.Add(myInputStream.ReadLine());//store tracks in array
-                    //lst_Genre_List.Items[Convert.ToInt32(next_line)].Equals(Genre_List[track].Text.ToString());
+                for (int track = 0; track < num_track; track++)//loop to cycle through tracks
+                { 
+                    Genre_List[gen].Items.Add(myInputStream.ReadLine());//store tracks in array
                 }
             }
 
@@ -85,19 +86,19 @@ namespace jukebox_assignment_SB
 
         }
 
-        //empty string container
+
         
 
         public void hscr_Selector_Scroll(object sender, ScrollEventArgs e)
         {
             //make scroll bar maximum size of number of genres
-            hscr_Selector.Maximum = Convert.ToInt16(num_genres);
+            hscr_Selector.Maximum = num_genres;
             //minimum is 0
             hscr_Selector.Minimum = 0;
             hscr_Selector.Value = 0;
 
             //properties small change and large change are both 1 - to stop it from over shooting the array index
-            if ((hscr_Selector.Value >= 0) && (hscr_Selector.Value <= Convert.ToInt16(num_genres)))
+            if ((hscr_Selector.Value >= 0) && (hscr_Selector.Value <= num_genres))
             {
                 txt_Genre_Title.Text = Genre_List[hscr_Selector.Value += 1].Items[0].ToString();
 

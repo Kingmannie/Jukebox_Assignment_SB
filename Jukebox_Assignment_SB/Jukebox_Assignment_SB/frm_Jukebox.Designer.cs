@@ -64,6 +64,7 @@
             this.txt_Genre_Title.Location = new System.Drawing.Point(95, 151);
             this.txt_Genre_Title.Margin = new System.Windows.Forms.Padding(0);
             this.txt_Genre_Title.Name = "txt_Genre_Title";
+            this.txt_Genre_Title.ReadOnly = true;
             this.txt_Genre_Title.Size = new System.Drawing.Size(255, 27);
             this.txt_Genre_Title.TabIndex = 1;
             this.txt_Genre_Title.TextChanged += new System.EventHandler(this.txt_Genre_Title_TextChanged);
@@ -94,6 +95,7 @@
             this.txt_Presently_Playing.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Presently_Playing.Location = new System.Drawing.Point(95, 324);
             this.txt_Presently_Playing.Name = "txt_Presently_Playing";
+            this.txt_Presently_Playing.ReadOnly = true;
             this.txt_Presently_Playing.Size = new System.Drawing.Size(255, 23);
             this.txt_Presently_Playing.TabIndex = 4;
             this.txt_Presently_Playing.TextChanged += new System.EventHandler(this.txt_Presently_Playing_TextChanged);
