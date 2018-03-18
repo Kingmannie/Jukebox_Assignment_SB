@@ -23,7 +23,7 @@ namespace jukebox_assignment_SB
 
         //exclusive genre value
         Int16 num_genres;
-
+        
         //First, find and store the directory of the config folder
         string configPath = Directory.GetCurrentDirectory() + "\\";
 
@@ -55,13 +55,12 @@ namespace jukebox_assignment_SB
 
             //capture first line of data from the config file
             num_genres = Convert.ToInt16(myInputStream.ReadLine());
+            
+            //create a new instance of listbox
+            Genre_List = new ListBox[num_genres];
 
             //small int to store number of tracks
             Int16 num_track;
-
-            //create a new instance of listbox
-            //array index value is converted string from config file.
-            Genre_List = new ListBox[num_genres];
 
             //loop to define genre - (3 genres as default) 
             for (int gen = 0; gen < num_genres; gen++)
@@ -76,69 +75,42 @@ namespace jukebox_assignment_SB
                 }
             }
 
-            //default title - first genre
+            //manual setup = default title & track - first genre & track
             txt_Genre_Title.Text = Genre_List[0].Items[0].ToString();
+            lst_Genre_List.Items.Add(Genre_List[0].Items[1].ToString());
 
-            //lst_Genre_List
-            //txt_Genre_Title.Text
+            //set up scroll bar with default values, also set min-max values
+            //[taking array index value into consideration, num_genres - 1]
+            hscr_Selector.Maximum = num_genres - 1;
+            hscr_Selector.Minimum = 0;
 
             myInputStream.Close();
 
         }
 
-
-        
-
-        public void hscr_Selector_Scroll(object sender, ScrollEventArgs e)
+        private void hscr_Selector_ValueChanged(object sender, EventArgs e)
         {
-            //make scroll bar maximum size of number of genres
-            hscr_Selector.Maximum = num_genres;
-            //minimum is 0
-            hscr_Selector.Minimum = 0;
-            hscr_Selector.Value = 0;
-
+            lst_Genre_List.Items.Clear();
             //properties small change and large change are both 1 - to stop it from over shooting the array index
-            if ((hscr_Selector.Value >= 0) && (hscr_Selector.Value <= num_genres))
-            {
-                txt_Genre_Title.Text = Genre_List[hscr_Selector.Value += 1].Items[0].ToString();
-
-            }
+            int track_index;
             
+            //switch the relevant array value to show the Genre Title
+            txt_Genre_Title.Text = Genre_List[hscr_Selector.Value].Items[0].ToString();
 
-            //while ((hscr_Selector.Value > 0) && (hscr_Selector.Value < Convert.ToInt16(num_genres)))
-            //{
-            //    if (hscr_Selector. == true)
-            //    {
+            //(# of items in each genre - 1) = # of tracks 
+            track_index = Genre_List[hscr_Selector.Value].Items.Count - 1;
 
-                //    }
-                //}
-                //the value is stored in the array correctly - just need to show
-
-                //if (hscr_Selector.Value
-
-
-                //hscr_Selector.Value = Convert.ToInt16(num_genres);
-
-                //Genre_List[2].Items[0].ToString()
-
-                //cycle titles in textbox
-
-
-                //txt_Genre_Title.Text = Genre_List[hscr_Selector.Value].Text.ToString();
-
-                //potentially search document here
-                //for (int i = 0; i < Convert.ToInt16(Genre_List[0]); i++)
-                //{
-                //hscr_Selector.Value += i;
-                //txt_Genre_Title.Text = Genre_List[hscr_Selector.Value].Text.ToString();
-                //txt_Genre_Title.Text = hscr_Selector.Value.ToString();
-                //}
+            for (int tracks = 0; tracks < track_index; tracks++)
+            {
+                //(scroll value = genre selector) and (tracks + 1 indicate item index to add)
+                lst_Genre_List.Items.Add(Genre_List[hscr_Selector.Value].Items[tracks + 1].ToString());
+            }
 
         }
-
-        private void lst_Genre_List_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void lst_Genre_List_DoubleClick(object sender, EventArgs e)
         {
-
+            lst_Playlist.Items.Add(Genre_List[lst_Genre_List.SelectedIndex].Items[lst_Genre_List.SelectedIndex + 1]);
         }
 
         public void txt_Genre_Title_TextChanged(object sender, EventArgs e)

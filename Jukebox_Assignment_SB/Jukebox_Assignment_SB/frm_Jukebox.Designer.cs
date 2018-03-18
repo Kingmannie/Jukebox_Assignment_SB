@@ -78,7 +78,7 @@
             this.lst_Genre_List.Name = "lst_Genre_List";
             this.lst_Genre_List.Size = new System.Drawing.Size(255, 95);
             this.lst_Genre_List.TabIndex = 2;
-            this.lst_Genre_List.SelectedIndexChanged += new System.EventHandler(this.lst_Genre_List_SelectedIndexChanged);
+            this.lst_Genre_List.DoubleClick += new System.EventHandler(this.lst_Genre_List_DoubleClick);
             // 
             // hscr_Selector
             // 
@@ -87,7 +87,7 @@
             this.hscr_Selector.Name = "hscr_Selector";
             this.hscr_Selector.Size = new System.Drawing.Size(255, 24);
             this.hscr_Selector.TabIndex = 3;
-            this.hscr_Selector.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hscr_Selector_Scroll);
+            this.hscr_Selector.ValueChanged += new System.EventHandler(this.hscr_Selector_ValueChanged);
             // 
             // txt_Presently_Playing
             // 
