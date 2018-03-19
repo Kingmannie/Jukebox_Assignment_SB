@@ -36,12 +36,12 @@
             this.hscr_Selector = new System.Windows.Forms.HScrollBar();
             this.txt_Presently_Playing = new System.Windows.Forms.TextBox();
             this.lst_Playlist = new System.Windows.Forms.ListBox();
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.media_player = new AxWMPLib.AxWindowsMediaPlayer();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.mnu_Jukebox = new System.Windows.Forms.MenuStrip();
             this.btn_Setup = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_About = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.media_player)).BeginInit();
             this.mnu_Jukebox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,16 +107,16 @@
             this.lst_Playlist.Size = new System.Drawing.Size(228, 134);
             this.lst_Playlist.TabIndex = 5;
             // 
-            // axWindowsMediaPlayer1
+            // media_player
             // 
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(95, 48);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(255, 45);
-            this.axWindowsMediaPlayer1.TabIndex = 6;
-            this.axWindowsMediaPlayer1.Visible = false;
-            this.axWindowsMediaPlayer1.Enter += new System.EventHandler(this.axWindowsMediaPlayer1_Enter);
+            this.media_player.Enabled = true;
+            this.media_player.Location = new System.Drawing.Point(95, 48);
+            this.media_player.Name = "media_player";
+            this.media_player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("media_player.OcxState")));
+            this.media_player.Size = new System.Drawing.Size(255, 45);
+            this.media_player.TabIndex = 6;
+            this.media_player.Visible = false;
+            this.media_player.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.media_player_PlayStateChange);
             // 
             // mnu_Jukebox
             // 
@@ -152,7 +152,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(444, 708);
-            this.Controls.Add(this.axWindowsMediaPlayer1);
+            this.Controls.Add(this.media_player);
             this.Controls.Add(this.lst_Playlist);
             this.Controls.Add(this.txt_Presently_Playing);
             this.Controls.Add(this.hscr_Selector);
@@ -165,7 +165,7 @@
             this.Name = "frm_Jukebox";
             this.Text = "My Juke Box v1.0";
             this.Load += new System.EventHandler(this.frm_Jukebox_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.media_player)).EndInit();
             this.mnu_Jukebox.ResumeLayout(false);
             this.mnu_Jukebox.PerformLayout();
             this.ResumeLayout(false);
@@ -181,7 +181,7 @@
         private System.Windows.Forms.HScrollBar hscr_Selector;
         private System.Windows.Forms.TextBox txt_Presently_Playing;
         private System.Windows.Forms.ListBox lst_Playlist;
-        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        private AxWMPLib.AxWindowsMediaPlayer media_player;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.MenuStrip mnu_Jukebox;
         private System.Windows.Forms.ToolStripMenuItem btn_Setup;

@@ -79,7 +79,7 @@ namespace jukebox_assignment_SB
             txt_Genre_Title.Text = Genre_List[0].Items[0].ToString();
             lst_Genre_List.Items.Add(Genre_List[0].Items[1].ToString());
 
-            //set up scroll bar with default values, also set min-max values
+            //set min-max values of scroll bar
             //[taking array index value into consideration, num_genres - 1]
             hscr_Selector.Maximum = num_genres - 1;
             hscr_Selector.Minimum = 0;
@@ -111,32 +111,33 @@ namespace jukebox_assignment_SB
         {
             //add selected genre item to playlist
             lst_Playlist.Items.Add(lst_Genre_List.SelectedItem);
-
-
-
+            //is a track playing or not?
+            track_playing();
         }
 
         public bool track_playing()
         {
-            while (isPlaying == false)
+            //when no track is playing and playlist is populated with at least 1 item.. proceed
+            while ((isPlaying == false) && (lst_Playlist.Items.Count > 0))
             {
                 //textual output will always be first item in playlist
                 txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
                 //remove playing item from top of playlist
                 lst_Playlist.Items.Remove(lst_Genre_List.SelectedItem);
+                //track is armed
                 isPlaying = true;
             }
             return isPlaying;
         }
 
-        private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)
+        private void media_player_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
+            //media player can pause - timer involved
 
         }
 
         private void btn_Setup_Click(object sender, EventArgs e)
         {
-            //txt_Genre_Title.Text = Genre_List[0].Items[0].ToString();
             var frm_Setup_Window = new frm_Setup_Window();
             frm_Setup_Window.Show();
 
@@ -147,8 +148,6 @@ namespace jukebox_assignment_SB
             var frm_About = new frm_About();
             frm_About.Show();
         }
-
-
 
 
     }

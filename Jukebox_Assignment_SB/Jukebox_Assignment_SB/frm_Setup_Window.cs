@@ -24,8 +24,29 @@ namespace jukebox_assignment_SB
 
         private void btn_Import_Tracks_Click(object sender, EventArgs e)
         {
+            //// Tells the application that something has changed 
+            //bool_Requires_Saving = true;
+            //// Let the user select the directory the music is coming from 
+            //if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            //{ // Populates the list array with all the files with the stated extension 
+            //    foreach (string file in _ Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath
+            //        , "*.*", _ SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3")
+            //          || _ s.EndsWith(".wma") || s.EndsWith(".wav") || s.EndsWith(".MP3")
+            //        || _ s.EndsWith(".WMA") || s.EndsWith(".WAV"))) 
+            //        { lst_Imported.Items.Add(file); }
 
+            //    if (lst_Imported.Items.Count > -1)
+            //    {
+            //        btn_Import_Tracks.Enabled = false;
+            //    }
+            //    else
+            //    {
+            //        btn_Import_Tracks.Enabled = true;
+            //    }
+            //}
         }
+    
+
 
         private void btn_Clear_Imported_Tracks_Click(object sender, EventArgs e)
         {
