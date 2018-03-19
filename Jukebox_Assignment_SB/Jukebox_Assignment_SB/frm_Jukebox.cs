@@ -28,7 +28,7 @@ namespace jukebox_assignment_SB
         string configPath = Directory.GetCurrentDirectory() + "\\";
 
         //tells us if the jukebox is playing or not
-        //bool isPlaying = false;
+        bool isPlaying = false;
 
         public void frm_Jukebox_Load(object sender, EventArgs e)
         {
@@ -112,20 +112,24 @@ namespace jukebox_assignment_SB
             //add selected genre item to playlist
             lst_Playlist.Items.Add(lst_Genre_List.SelectedItem);
 
+
+
         }
 
-        public void txt_Genre_Title_TextChanged(object sender, EventArgs e)
+        public bool track_playing()
         {
-            //txt_Genre_Title.Text = Genre_List[0].Items[0].ToString();
-
+            while (isPlaying == false)
+            {
+                //textual output will always be first item in playlist
+                txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
+                //remove playing item from top of playlist
+                lst_Playlist.Items.Remove(lst_Genre_List.SelectedItem);
+                isPlaying = true;
+            }
+            return isPlaying;
         }
 
-        private void txt_Presently_Playing_TextChanged(object sender, EventArgs e)
-        {
-            //txt_Presently_Playing =;
-        }
-
-        private void lst_Playlist_SelectedIndexChanged(object sender, EventArgs e)
+        private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)
         {
 
         }
@@ -144,10 +148,7 @@ namespace jukebox_assignment_SB
             frm_About.Show();
         }
 
-        private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)
-        {
 
-        }
 
 
     }

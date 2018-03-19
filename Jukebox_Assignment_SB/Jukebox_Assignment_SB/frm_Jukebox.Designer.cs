@@ -67,7 +67,6 @@
             this.txt_Genre_Title.ReadOnly = true;
             this.txt_Genre_Title.Size = new System.Drawing.Size(255, 27);
             this.txt_Genre_Title.TabIndex = 1;
-            this.txt_Genre_Title.TextChanged += new System.EventHandler(this.txt_Genre_Title_TextChanged);
             // 
             // lst_Genre_List
             // 
@@ -98,7 +97,6 @@
             this.txt_Presently_Playing.ReadOnly = true;
             this.txt_Presently_Playing.Size = new System.Drawing.Size(255, 23);
             this.txt_Presently_Playing.TabIndex = 4;
-            this.txt_Presently_Playing.TextChanged += new System.EventHandler(this.txt_Presently_Playing_TextChanged);
             // 
             // lst_Playlist
             // 
@@ -108,7 +106,6 @@
             this.lst_Playlist.Name = "lst_Playlist";
             this.lst_Playlist.Size = new System.Drawing.Size(228, 134);
             this.lst_Playlist.TabIndex = 5;
-            this.lst_Playlist.SelectedIndexChanged += new System.EventHandler(this.lst_Playlist_SelectedIndexChanged);
             // 
             // axWindowsMediaPlayer1
             // 
