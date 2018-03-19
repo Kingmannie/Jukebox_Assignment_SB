@@ -37,7 +37,7 @@
             this.txt_Presently_Playing = new System.Windows.Forms.TextBox();
             this.lst_Playlist = new System.Windows.Forms.ListBox();
             this.media_player = new AxWMPLib.AxWindowsMediaPlayer();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.track_timer = new System.Windows.Forms.Timer(this.components);
             this.mnu_Jukebox = new System.Windows.Forms.MenuStrip();
             this.btn_Setup = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_About = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,6 +118,10 @@
             this.media_player.Visible = false;
             this.media_player.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.media_player_PlayStateChange);
             // 
+            // track_timer
+            // 
+            this.track_timer.Interval = 1;
+            // 
             // mnu_Jukebox
             // 
             this.mnu_Jukebox.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -182,7 +186,7 @@
         private System.Windows.Forms.TextBox txt_Presently_Playing;
         private System.Windows.Forms.ListBox lst_Playlist;
         private AxWMPLib.AxWindowsMediaPlayer media_player;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer track_timer;
         private System.Windows.Forms.MenuStrip mnu_Jukebox;
         private System.Windows.Forms.ToolStripMenuItem btn_Setup;
         private System.Windows.Forms.ToolStripMenuItem btn_About;

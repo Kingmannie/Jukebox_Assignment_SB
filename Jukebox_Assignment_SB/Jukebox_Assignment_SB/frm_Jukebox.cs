@@ -84,11 +84,7 @@ namespace jukebox_assignment_SB
             hscr_Selector.Maximum = num_genres - 1;
             hscr_Selector.Minimum = 0;
 
-            //make my media player autoplay
-            media_player.settings.autoStart = true;
-
             myInputStream.Close();
-
         }
 
         private void hscr_Selector_ValueChanged(object sender, EventArgs e)
@@ -109,55 +105,121 @@ namespace jukebox_assignment_SB
                 lst_Genre_List.Items.Add(Genre_List[hscr_Selector.Value].Items[tracks + 1].ToString());
             }
         }
-        
+
         private void lst_Genre_List_DoubleClick(object sender, EventArgs e)
         {
             //add selected genre item to playlist
             lst_Playlist.Items.Add(lst_Genre_List.SelectedItem);
-            
-            //textual output will always be first item in playlist
-            txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
-
             //initiate the track playing method
             track_playing();
-
         }
 
-        public bool track_playing()
+        public void track_playing()
         {
-            //when no track is playing and playlist is populated with at least 1 item.. proceed
-            while ((isPlaying == false) && (lst_Playlist.Items.Count > 0))
+            //when no song is playing & playlist is populated.. proceed
+            if ((isPlaying == false) && (lst_Playlist.Items.Count > 0)) 
             {
+
+                //textual output will always be first item in playlist
+                txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
                 //path to track
                 media_player.URL = Directory.GetCurrentDirectory() + "\\Tracks\\" + txt_Presently_Playing.Text;
-
                 //play the track
                 media_player.Ctlcontrols.play();
 
-                //remove playing item from top of playlist
-                lst_Playlist.Items.Remove(lst_Genre_List.SelectedItem);
+                //remove top item when finished with it
+                lst_Playlist.Items.Remove(lst_Playlist.Items[0]);
 
-                //timer runs with the track
-                timer1.Enabled = true;
+                
+                //track_timer.Start();
+                //track_timer.Interval = 5;
+                //track_timer.Stop();
+
+                //tmr.Tick += new EventHandler(tmr_Tick);
+                //wplayer = new WMPLib.WindowsMediaPlayer();
+                //wplayer.URL = "c:/Standup.mp3";
+                //wplayer.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(wplayer_PlayStateChange);
+                //wplayer.controls.play();
+
+                //HERE - NEED TO CREATE INTERVAL THAT LASTS AS LONG AS THE TRACK
+                //start the timer - to last for the length of the song
+                //track_timer.Start();
+                //String track_duration = media_player.currentMedia.durationString;
+                //media_player.currentMedia.duration;
+                //track_timer.Interval = Convert.ToInt32(media_player.currentMedia.duration);
+                //track_timer.Stop();
+
+                //if (track_timer.Interval.ToString() == media_player.currentMedia.durationString)
+                //{
+
+                //}
             }
-            return isPlaying;
         }
         
         private void media_player_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) 
         {
+            media_player.settings.setMode("loop", true);
             //media player can pause - timer involved
             if (media_player.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
+
                 //track is armed
                 isPlaying = true;
+                track_timer.Enabled = true;
             }
-            else if (media_player.playState == WMPLib.WMPPlayState.wmppsStopped)
+            else if (media_player.playState == WMPLib.WMPPlayState.wmppsMediaEnded)
             {
-                timer1.Enabled = false;
+                isPlaying = false;
+                track_timer.Enabled = false;
                 track_playing();
+
             }
 
+            //lst_Playlist.Items.Count > 0;
             //media_player.currentMedia.durationString;
+            //after starting timer, delete the top playlist item
+            //lst_Playlist.Items.Remove(lst_Playlist.Items[0]);
+            //txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
+
+            //wmppsUndefined
+            //Windows Media Player is in an undefined state.
+
+            //wmppsStopped
+            //Playback is stopped.
+
+            //wmppsPaused
+            //Playback is paused.
+
+            //wmppsPlaying
+            //Stream is playing.
+
+            //wmppsScanForward
+            //Stream is scanning forward.
+
+            //wmppsScanReverse
+            //Stream is scanning backward.
+
+            //wmppsBuffering
+            //Stream is being buffered.
+
+            //wmppsWaiting
+            //Waiting for streaming data.
+
+            //wmppsMediaEnded
+            //The end of the media item has been reached.
+
+            //wmppsTransitioning
+            //Preparing new media item.
+
+            //wmppsReady
+            //Ready to begin playing.
+
+            //wmppsReconnecting
+            //Trying to reconnect for streaming data.
+
+            //wmppsLast
+            //Last enumerated value.Not a valid state.
+
         }
 
         private void btn_Setup_Click(object sender, EventArgs e)
@@ -172,7 +234,5 @@ namespace jukebox_assignment_SB
             var frm_About = new frm_About();
             frm_About.Show();
         }
-
-
     }
 }
