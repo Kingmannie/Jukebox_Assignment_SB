@@ -104,9 +104,9 @@
             // 
             this.lst_Playlist.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lst_Playlist.FormattingEnabled = true;
-            this.lst_Playlist.Location = new System.Drawing.Point(145, 353);
+            this.lst_Playlist.Location = new System.Drawing.Point(109, 353);
             this.lst_Playlist.Name = "lst_Playlist";
-            this.lst_Playlist.Size = new System.Drawing.Size(155, 134);
+            this.lst_Playlist.Size = new System.Drawing.Size(228, 134);
             this.lst_Playlist.TabIndex = 5;
             this.lst_Playlist.SelectedIndexChanged += new System.EventHandler(this.lst_Playlist_SelectedIndexChanged);
             // 

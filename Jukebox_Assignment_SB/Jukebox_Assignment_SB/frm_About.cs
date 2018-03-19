@@ -17,15 +17,9 @@ namespace jukebox_assignment_SB
             InitializeComponent();
         }
 
-        private void txt_About_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_About_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
     }
 }

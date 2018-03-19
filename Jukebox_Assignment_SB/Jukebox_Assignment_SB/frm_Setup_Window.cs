@@ -84,7 +84,7 @@ namespace jukebox_assignment_SB
 
         private void btn_Setup_Cancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void frm_Setup_Window_Load(object sender, EventArgs e)

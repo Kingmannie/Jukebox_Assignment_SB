@@ -180,7 +180,7 @@
             this.txt_Genre_Title.Name = "txt_Genre_Title";
             this.txt_Genre_Title.Size = new System.Drawing.Size(264, 27);
             this.txt_Genre_Title.TabIndex = 2;
-            this.txt_Genre_Title.Text = "Playlist 1";
+            this.txt_Genre_Title.Text = "General";
             this.txt_Genre_Title.TextChanged += new System.EventHandler(this.txt_Genre_Title_TextChanged);
             // 
             // lbl_Genre
@@ -252,6 +252,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_Setup_Cancel);
             this.Controls.Add(this.btn_Setup_OK);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_Setup_Window";
             this.Text = "Setup";

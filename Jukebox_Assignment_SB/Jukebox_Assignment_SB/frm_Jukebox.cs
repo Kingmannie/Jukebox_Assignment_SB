@@ -105,12 +105,13 @@ namespace jukebox_assignment_SB
                 //(scroll value = genre selector) and (tracks + 1 indicate item index to add)
                 lst_Genre_List.Items.Add(Genre_List[hscr_Selector.Value].Items[tracks + 1].ToString());
             }
-
         }
         
         private void lst_Genre_List_DoubleClick(object sender, EventArgs e)
         {
-            lst_Playlist.Items.Add(Genre_List[lst_Genre_List.SelectedIndex].Items[lst_Genre_List.SelectedIndex + 1]);
+            //add selected genre item to playlist
+            lst_Playlist.Items.Add(lst_Genre_List.SelectedItem);
+
         }
 
         public void txt_Genre_Title_TextChanged(object sender, EventArgs e)
