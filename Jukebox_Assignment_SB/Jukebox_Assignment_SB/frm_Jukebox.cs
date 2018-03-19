@@ -25,7 +25,7 @@ namespace jukebox_assignment_SB
         Int16 num_genres;
         
         //First, find and store the directory of the config folder
-        string configPath = Directory.GetCurrentDirectory() + "\\";
+        string configPath = Directory.GetCurrentDirectory();
 
         //tells us if the jukebox is playing or not
         bool isPlaying = false;
@@ -34,7 +34,7 @@ namespace jukebox_assignment_SB
         {
             //on form load, need to create the config file.
             StreamWriter myOutputStream = File.CreateText(configPath + "Config.txt");
-
+            
             //write the config file to build the initial structure for our config file.
             myOutputStream.WriteLine("3"); //(number of genres)
             myOutputStream.WriteLine("1"); //(number of tracks in genre)
@@ -84,6 +84,9 @@ namespace jukebox_assignment_SB
             hscr_Selector.Maximum = num_genres - 1;
             hscr_Selector.Minimum = 0;
 
+            //make my media player autoplay
+            media_player.settings.autoStart = true;
+
             myInputStream.Close();
 
         }
@@ -111,8 +114,13 @@ namespace jukebox_assignment_SB
         {
             //add selected genre item to playlist
             lst_Playlist.Items.Add(lst_Genre_List.SelectedItem);
-            //is a track playing or not?
+            
+            //textual output will always be first item in playlist
+            txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
+
+            //initiate the track playing method
             track_playing();
+
         }
 
         public bool track_playing()
@@ -120,20 +128,36 @@ namespace jukebox_assignment_SB
             //when no track is playing and playlist is populated with at least 1 item.. proceed
             while ((isPlaying == false) && (lst_Playlist.Items.Count > 0))
             {
-                //textual output will always be first item in playlist
-                txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
+                //path to track
+                media_player.URL = Directory.GetCurrentDirectory() + "\\Tracks\\" + txt_Presently_Playing.Text;
+
+                //play the track
+                media_player.Ctlcontrols.play();
+
                 //remove playing item from top of playlist
                 lst_Playlist.Items.Remove(lst_Genre_List.SelectedItem);
-                //track is armed
-                isPlaying = true;
+
+                //timer runs with the track
+                timer1.Enabled = true;
             }
             return isPlaying;
         }
-
-        private void media_player_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+        
+        private void media_player_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) 
         {
             //media player can pause - timer involved
+            if (media_player.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                //track is armed
+                isPlaying = true;
+            }
+            else if (media_player.playState == WMPLib.WMPPlayState.wmppsStopped)
+            {
+                timer1.Enabled = false;
+                track_playing();
+            }
 
+            //media_player.currentMedia.durationString;
         }
 
         private void btn_Setup_Click(object sender, EventArgs e)
