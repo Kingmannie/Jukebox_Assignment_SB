@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;  //include system.io classes for reading + writing input/output
 
 namespace jukebox_assignment_SB
 {
@@ -22,28 +23,35 @@ namespace jukebox_assignment_SB
 
         }
 
+        string configPath = Directory.GetCurrentDirectory();
+        bool bool_Requires_Saving;
         private void btn_Import_Tracks_Click(object sender, EventArgs e)
         {
-            //// Tells the application that something has changed 
-            //bool_Requires_Saving = true;
-            //// Let the user select the directory the music is coming from 
-            //if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            //{ // Populates the list array with all the files with the stated extension 
-            //    foreach (string file in _ Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath
-            //        , "*.*", _ SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3")
-            //          || _ s.EndsWith(".wma") || s.EndsWith(".wav") || s.EndsWith(".MP3")
-            //        || _ s.EndsWith(".WMA") || s.EndsWith(".WAV"))) 
-            //        { lst_Imported.Items.Add(file); }
+            String folderName = Directory.GetCurrentDirectory();
+            Form form2 = new Form();
+            // Tells the application that something has changed 
+            bool_Requires_Saving = true;
+            // Let the user select the directory the music is coming from 
+            if (form2.ShowDialog() == DialogResult.OK)
+            { // Populates the list array with all the files with the stated extension 
+                    foreach (string file in  
+                    Directory.EnumerateFiles(folderName, "*.*", 
+                    SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || 
+                    s.EndsWith(".wma") || s.EndsWith(".wav") || s.EndsWith(".MP3") || 
+                    s.EndsWith(".WMA") || s.EndsWith(".WAV"))) 
+                {
+                    lst_Imported_Tracks.Items.Add(file);
+                }
 
-            //    if (lst_Imported.Items.Count > -1)
-            //    {
-            //        btn_Import_Tracks.Enabled = false;
-            //    }
-            //    else
-            //    {
-            //        btn_Import_Tracks.Enabled = true;
-            //    }
-            //}
+                if (lst_Imported_Tracks.Items.Count > -1)
+                {
+                    btn_Import_Tracks.Enabled = false;
+                }
+                else
+                {
+                    btn_Import_Tracks.Enabled = true;
+                }
+            }
         }
     
 

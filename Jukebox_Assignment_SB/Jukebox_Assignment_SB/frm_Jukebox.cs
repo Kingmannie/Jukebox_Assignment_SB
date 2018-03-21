@@ -126,11 +126,11 @@ namespace jukebox_assignment_SB
                 media_player.URL = Directory.GetCurrentDirectory() + "\\Tracks\\" + txt_Presently_Playing.Text;
                 //play the track
                 media_player.Ctlcontrols.play();
-
+                //media_player.Ctlcontrols.next();
                 //remove top item when finished with it
                 lst_Playlist.Items.Remove(lst_Playlist.Items[0]);
 
-                
+
                 //track_timer.Start();
                 //track_timer.Interval = 5;
                 //track_timer.Stop();
@@ -148,17 +148,17 @@ namespace jukebox_assignment_SB
                 //media_player.currentMedia.duration;
                 //track_timer.Interval = Convert.ToInt32(media_player.currentMedia.duration);
                 //track_timer.Stop();
-
+                   
                 //if (track_timer.Interval.ToString() == media_player.currentMedia.durationString)
                 //{
-
+                    
                 //}
             }
         }
         
         private void media_player_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) 
         {
-            media_player.settings.setMode("loop", true);
+            //media_player.settings.setMode("loop", true);
             //media player can pause - timer involved
             if (media_player.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
@@ -167,12 +167,11 @@ namespace jukebox_assignment_SB
                 isPlaying = true;
                 track_timer.Enabled = true;
             }
-            else if (media_player.playState == WMPLib.WMPPlayState.wmppsMediaEnded)
+            while (media_player.playState == WMPLib.WMPPlayState.wmppsMediaEnded) //while or else if? - do while?
             {
                 isPlaying = false;
                 track_timer.Enabled = false;
                 track_playing();
-
             }
 
             //lst_Playlist.Items.Count > 0;
