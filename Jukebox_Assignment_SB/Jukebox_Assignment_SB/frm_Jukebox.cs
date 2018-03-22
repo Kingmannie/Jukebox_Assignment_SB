@@ -122,14 +122,15 @@ namespace jukebox_assignment_SB
 
                 //textual output will always be first item in playlist
                 txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
+                //remove top item when finished with it
+                lst_Playlist.Items.Remove(lst_Playlist.Items[0]);
                 //path to track
                 media_player.URL = Directory.GetCurrentDirectory() + "\\Tracks\\" + txt_Presently_Playing.Text;
                 //play the track
                 media_player.Ctlcontrols.play();
                 //media_player.Ctlcontrols.next();
-                //remove top item when finished with it
-                lst_Playlist.Items.Remove(lst_Playlist.Items[0]);
 
+                //isPlaying = true;
 
                 //track_timer.Start();
                 //track_timer.Interval = 5;
@@ -148,10 +149,10 @@ namespace jukebox_assignment_SB
                 //media_player.currentMedia.duration;
                 //track_timer.Interval = Convert.ToInt32(media_player.currentMedia.duration);
                 //track_timer.Stop();
-                   
+
                 //if (track_timer.Interval.ToString() == media_player.currentMedia.durationString)
                 //{
-                    
+
                 //}
             }
         }
@@ -165,13 +166,13 @@ namespace jukebox_assignment_SB
 
                 //track is armed
                 isPlaying = true;
-                track_timer.Enabled = true;
+                track_timer.Enabled = false;
             }
-            while (media_player.playState == WMPLib.WMPPlayState.wmppsMediaEnded) //while or else if? - do while?
+            if (media_player.playState == WMPLib.WMPPlayState.wmppsStopped) //while or else if? - do while?
             {
                 isPlaying = false;
-                track_timer.Enabled = false;
-                track_playing();
+                track_timer.Enabled = true;
+                
             }
 
             //lst_Playlist.Items.Count > 0;
@@ -232,6 +233,14 @@ namespace jukebox_assignment_SB
         {
             var frm_About = new frm_About();
             frm_About.Show();
+        }
+
+        private void track_timer_Tick(object sender, EventArgs e)
+        {
+            //track_timer.Enabled = true;
+            track_timer.Start();
+            track_timer.Stop();
+            track_playing();
         }
     }
 }

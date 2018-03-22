@@ -120,7 +120,8 @@
             // 
             // track_timer
             // 
-            this.track_timer.Interval = 1;
+            this.track_timer.Interval = 3000;
+            this.track_timer.Tick += new System.EventHandler(this.track_timer_Tick);
             // 
             // mnu_Jukebox
             // 

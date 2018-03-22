@@ -28,14 +28,14 @@ namespace jukebox_assignment_SB
         private void btn_Import_Tracks_Click(object sender, EventArgs e)
         {
             String folderName = Directory.GetCurrentDirectory();
-            Form form2 = new Form();
+            OpenFileDialog dlg2 = new OpenFileDialog();
             // Tells the application that something has changed 
             bool_Requires_Saving = true;
             // Let the user select the directory the music is coming from 
-            if (form2.ShowDialog() == DialogResult.OK)
+            if (dlg2.ShowDialog() == DialogResult.OK)
             { // Populates the list array with all the files with the stated extension 
                     foreach (string file in  
-                    Directory.EnumerateFiles(folderName, "*.*", 
+                    Directory.EnumerateFiles(dlg2.SelectedPath, "*.*", 
                     SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || 
                     s.EndsWith(".wma") || s.EndsWith(".wav") || s.EndsWith(".MP3") || 
                     s.EndsWith(".WMA") || s.EndsWith(".WAV"))) 
