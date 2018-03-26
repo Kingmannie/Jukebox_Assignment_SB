@@ -24,7 +24,7 @@ namespace jukebox_assignment_SB
         //First, find and store the directory of the config folder
         string configPath = Directory.GetCurrentDirectory();
 
-        //save switch
+        //save bool
         bool bool_Requires_Saving;
 
         //int selector - to carry the index values 
@@ -66,6 +66,10 @@ namespace jukebox_assignment_SB
 
             lst_Playlist.Items.Add(Genre_List[0].Items[1].ToString());
 
+            //starting with first array - disable ability to go backwards
+            btn_Genre_Previous.Enabled = false;
+
+
             myInputStream.Close();
 
         }
@@ -73,11 +77,17 @@ namespace jukebox_assignment_SB
         private void btn_Genre_Previous_Click(object sender, EventArgs e)
         {
             lst_Playlist.Items.Clear();
-            //set the range of decrement
-            if ((prev_next < num_genres) && (prev_next > 0))
+
+            if (prev_next >= 0)
             {
                 //decrement carrier - for the index
                 prev_next--;
+                //enable the next button as the prev button decrements.
+                btn_Genre_Next.Enabled = true;
+            }
+            if (prev_next == 0)
+            {
+                btn_Genre_Previous.Enabled = false;
             }
             //properties small change and large change are both 1 - to stop it from over shooting the array index
             int track_index;
@@ -93,20 +103,25 @@ namespace jukebox_assignment_SB
                 //cycle items and add to playlist
                 lst_Playlist.Items.Add(Genre_List[prev_next].Items[tracks + 1].ToString());
             }
-            //simple switch carrying back the arrays
-            
+
         }
 
         private void btn_Genre_Next_Click(object sender, EventArgs e)
         {
             lst_Playlist.Items.Clear();
-            //limit to between 0 and -1 of number of genres
-            //last increment will lock - and avoid crashing because of array overflow.
+
             if (prev_next < num_genres - 1)
             {
                 //increment carrier - for the index
                 prev_next++;
+                //enable the prev button as the next button increments.
+                btn_Genre_Previous.Enabled = true;
             }
+            if (prev_next == num_genres - 1)
+            {
+                btn_Genre_Next.Enabled = false;
+            }
+
             //properties small change and large change are both 1 - to stop it from over shooting the array index
             int track_index;
 
@@ -121,8 +136,7 @@ namespace jukebox_assignment_SB
                 //cycle items and add to playlist
                 lst_Playlist.Items.Add(Genre_List[prev_next].Items[tracks + 1].ToString());
             }
-            //simple switch carrying forward the arrays
-            
+
         }
 
         private void btn_Import_Tracks_Click(object sender, EventArgs e)
@@ -146,45 +160,68 @@ namespace jukebox_assignment_SB
                 {
                     btn_Import_Tracks.Enabled = false;
                 }
-                else
-                {
-                    btn_Import_Tracks.Enabled = true;
-                }
             }
         }
-
         
         private void btn_Clear_Imported_Tracks_Click(object sender, EventArgs e)
         {
-
+            //clear the import tracks list
+            lst_Imported_Tracks.Items.Clear();
+            //a way to re-enable import track functionality
+            btn_Import_Tracks.Enabled = true;
         }
 
         private void btn_Copy_Track_Click(object sender, EventArgs e)
         {
-            lst_Playlist.Items.Add(lst_Imported_Tracks.SelectedItem);
+            if (lst_Imported_Tracks.SelectedItems.Count >= 1)
+            {
+                lst_Playlist.Items.Add(lst_Imported_Tracks.SelectedItem);
+                //switch on the neccessity to save
+                bool_Requires_Saving = true;
+            }
+            else {
+                MessageBox.Show("You must Select an item to Copy.");
+            }
+            
         }
 
         private void btn_Move_Track_Click(object sender, EventArgs e)
         {
 
+            if (lst_Imported_Tracks.SelectedItems.Count >= 1)
+            {
+                lst_Playlist.Items.Add(lst_Imported_Tracks.SelectedItem);
+                //deleting the selected item at the top - seems like your moving not copying.
+                lst_Imported_Tracks.Items.Remove(lst_Imported_Tracks.SelectedItem);
+                //switch on the neccessity to save
+                bool_Requires_Saving = true;
+            }
+            else
+            {
+                MessageBox.Show("You must Select an item to Move.");
+            }
+
         }
 
         private void btn_Delete_Genre_Track_Click(object sender, EventArgs e)
         {
-
+            if (lst_Imported_Tracks.SelectedItems.Count >= 1)
+            {
+                lst_Imported_Tracks.Items.Remove(lst_Imported_Tracks.SelectedItem);
+                //switch on the neccessity to save
+                bool_Requires_Saving = true;
+            }
+            else
+            {
+                MessageBox.Show("You must Select an item to Delete.");
+            }
+            
         }
 
         private void txt_Genre_Title_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void lst_Playlist_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
 
         private void btn_Genre_Add_Click(object sender, EventArgs e)
         {
@@ -193,17 +230,34 @@ namespace jukebox_assignment_SB
 
         private void btn_Genre_Delete_Click(object sender, EventArgs e)
         {
-
+            if (lst_Playlist.SelectedItems.Count < 1)
+            {
+                MessageBox.Show("you Havent selected an item, select one to continue");
+            }
         }
 
         private void btn_Setup_OK_Click(object sender, EventArgs e)
         {
-
+            if (bool_Requires_Saving == true)
+            {
+                
+            }
+            else if (bool_Requires_Saving == false)
+            {
+                this.Close();
+            }
         }
 
         private void btn_Setup_Cancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (bool_Requires_Saving == true)
+            {
+                
+            }
+            else if (bool_Requires_Saving == false)
+            {
+                this.Close();
+            }
         }
 
 

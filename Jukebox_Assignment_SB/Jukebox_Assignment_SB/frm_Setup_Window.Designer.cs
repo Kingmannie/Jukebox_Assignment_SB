@@ -200,7 +200,6 @@
             this.lst_Playlist.Name = "lst_Playlist";
             this.lst_Playlist.Size = new System.Drawing.Size(264, 264);
             this.lst_Playlist.TabIndex = 0;
-            this.lst_Playlist.SelectedIndexChanged += new System.EventHandler(this.lst_Playlist_SelectedIndexChanged);
             // 
             // grpbx_Imported_Tracks
             // 
