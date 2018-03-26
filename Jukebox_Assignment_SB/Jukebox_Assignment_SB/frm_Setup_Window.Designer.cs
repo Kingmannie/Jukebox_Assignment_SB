@@ -40,7 +40,7 @@
             this.btn_Genre_Delete = new System.Windows.Forms.Button();
             this.btn_Genre_Add = new System.Windows.Forms.Button();
             this.btn_Genre_Previous = new System.Windows.Forms.Button();
-            this.txt_Genre_Title = new System.Windows.Forms.TextBox();
+            this.txt_Genre_Title2 = new System.Windows.Forms.TextBox();
             this.lbl_Genre = new System.Windows.Forms.Label();
             this.lst_Playlist = new System.Windows.Forms.ListBox();
             this.grpbx_Imported_Tracks = new System.Windows.Forms.GroupBox();
@@ -121,7 +121,7 @@
             this.grpbx_Present_Genre_Track_List.Controls.Add(this.btn_Genre_Delete);
             this.grpbx_Present_Genre_Track_List.Controls.Add(this.btn_Genre_Add);
             this.grpbx_Present_Genre_Track_List.Controls.Add(this.btn_Genre_Previous);
-            this.grpbx_Present_Genre_Track_List.Controls.Add(this.txt_Genre_Title);
+            this.grpbx_Present_Genre_Track_List.Controls.Add(this.txt_Genre_Title2);
             this.grpbx_Present_Genre_Track_List.Controls.Add(this.lbl_Genre);
             this.grpbx_Present_Genre_Track_List.Controls.Add(this.lst_Playlist);
             this.grpbx_Present_Genre_Track_List.Location = new System.Drawing.Point(478, 10);
@@ -172,16 +172,16 @@
             this.btn_Genre_Previous.UseVisualStyleBackColor = true;
             this.btn_Genre_Previous.Click += new System.EventHandler(this.btn_Genre_Previous_Click);
             // 
-            // txt_Genre_Title
+            // txt_Genre_Title2
             // 
-            this.txt_Genre_Title.BackColor = System.Drawing.SystemColors.Control;
-            this.txt_Genre_Title.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Genre_Title.Location = new System.Drawing.Point(6, 48);
-            this.txt_Genre_Title.Name = "txt_Genre_Title";
-            this.txt_Genre_Title.Size = new System.Drawing.Size(264, 27);
-            this.txt_Genre_Title.TabIndex = 2;
-            this.txt_Genre_Title.Text = "General";
-            this.txt_Genre_Title.TextChanged += new System.EventHandler(this.txt_Genre_Title_TextChanged);
+            this.txt_Genre_Title2.BackColor = System.Drawing.SystemColors.Control;
+            this.txt_Genre_Title2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Genre_Title2.Location = new System.Drawing.Point(6, 48);
+            this.txt_Genre_Title2.Name = "txt_Genre_Title2";
+            this.txt_Genre_Title2.ReadOnly = true;
+            this.txt_Genre_Title2.Size = new System.Drawing.Size(264, 27);
+            this.txt_Genre_Title2.TabIndex = 2;
+            this.txt_Genre_Title2.TextChanged += new System.EventHandler(this.txt_Genre_Title_TextChanged);
             // 
             // lbl_Genre
             // 
@@ -242,7 +242,6 @@
             this.lst_Imported_Tracks.Name = "lst_Imported_Tracks";
             this.lst_Imported_Tracks.Size = new System.Drawing.Size(277, 329);
             this.lst_Imported_Tracks.TabIndex = 0;
-            this.lst_Imported_Tracks.SelectedIndexChanged += new System.EventHandler(this.lst_Imported_Tracks_SelectedIndexChanged);
             // 
             // frm_Setup_Window
             // 
@@ -256,6 +255,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_Setup_Window";
             this.Text = "Setup";
+            this.Load += new System.EventHandler(this.frm_Setup_Window_Load);
             this.panel1.ResumeLayout(false);
             this.grpbx_Present_Genre_Track_List.ResumeLayout(false);
             this.grpbx_Present_Genre_Track_List.PerformLayout();
@@ -278,7 +278,7 @@
         private System.Windows.Forms.ListBox lst_Imported_Tracks;
         private System.Windows.Forms.Button btn_Clear_Imported_Tracks;
         private System.Windows.Forms.Button btn_Import_Tracks;
-        private System.Windows.Forms.TextBox txt_Genre_Title;
+        private System.Windows.Forms.TextBox txt_Genre_Title2;
         private System.Windows.Forms.Label lbl_Genre;
         private System.Windows.Forms.Button btn_Genre_Next;
         private System.Windows.Forms.Button btn_Genre_Delete;

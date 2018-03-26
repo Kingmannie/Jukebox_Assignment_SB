@@ -23,7 +23,7 @@ namespace jukebox_assignment_SB
 
         //exclusive genre value
         Int16 num_genres;
-        
+
         //First, find and store the directory of the config folder
         string configPath = Directory.GetCurrentDirectory();
 
@@ -33,7 +33,7 @@ namespace jukebox_assignment_SB
         public void frm_Jukebox_Load(object sender, EventArgs e)
         {
             //on form load, need to create the config file.
-            StreamWriter myOutputStream = File.CreateText(configPath + "Config.txt");
+            StreamWriter myOutputStream = File.CreateText(configPath + "\\Config\\Config.txt");
             
             //write the config file to build the initial structure for our config file.
             myOutputStream.WriteLine("3"); //(number of genres)
@@ -77,6 +77,7 @@ namespace jukebox_assignment_SB
 
             //manual setup = default title & track - first genre & track
             txt_Genre_Title.Text = Genre_List[0].Items[0].ToString();
+            
             lst_Genre_List.Items.Add(Genre_List[0].Items[1].ToString());
 
             //set min-max values of scroll bar
@@ -119,7 +120,6 @@ namespace jukebox_assignment_SB
             //when no song is playing & playlist is populated.. proceed
             if ((isPlaying == false) && (lst_Playlist.Items.Count > 0)) 
             {
-
                 //textual output will always be first item in playlist
                 txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
                 //remove top item when finished with it
@@ -128,97 +128,23 @@ namespace jukebox_assignment_SB
                 media_player.URL = Directory.GetCurrentDirectory() + "\\Tracks\\" + txt_Presently_Playing.Text;
                 //play the track
                 media_player.Ctlcontrols.play();
-                //media_player.Ctlcontrols.next();
-
-                //isPlaying = true;
-
-                //track_timer.Start();
-                //track_timer.Interval = 5;
-                //track_timer.Stop();
-
-                //tmr.Tick += new EventHandler(tmr_Tick);
-                //wplayer = new WMPLib.WindowsMediaPlayer();
-                //wplayer.URL = "c:/Standup.mp3";
-                //wplayer.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(wplayer_PlayStateChange);
-                //wplayer.controls.play();
-
-                //HERE - NEED TO CREATE INTERVAL THAT LASTS AS LONG AS THE TRACK
-                //start the timer - to last for the length of the song
-                //track_timer.Start();
-                //String track_duration = media_player.currentMedia.durationString;
-                //media_player.currentMedia.duration;
-                //track_timer.Interval = Convert.ToInt32(media_player.currentMedia.duration);
-                //track_timer.Stop();
-
-                //if (track_timer.Interval.ToString() == media_player.currentMedia.durationString)
-                //{
-
-                //}
             }
         }
         
         private void media_player_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) 
         {
-            //media_player.settings.setMode("loop", true);
-            //media player can pause - timer involved
             if (media_player.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
-
-                //track is armed
+                //track is armed timer off
                 isPlaying = true;
                 track_timer.Enabled = false;
             }
-            if (media_player.playState == WMPLib.WMPPlayState.wmppsStopped) //while or else if? - do while?
+            if (media_player.playState == WMPLib.WMPPlayState.wmppsStopped)
             {
+                //when track stops enable timer sequence
                 isPlaying = false;
                 track_timer.Enabled = true;
-                
             }
-
-            //lst_Playlist.Items.Count > 0;
-            //media_player.currentMedia.durationString;
-            //after starting timer, delete the top playlist item
-            //lst_Playlist.Items.Remove(lst_Playlist.Items[0]);
-            //txt_Presently_Playing.Text = lst_Playlist.Items[0].ToString();
-
-            //wmppsUndefined
-            //Windows Media Player is in an undefined state.
-
-            //wmppsStopped
-            //Playback is stopped.
-
-            //wmppsPaused
-            //Playback is paused.
-
-            //wmppsPlaying
-            //Stream is playing.
-
-            //wmppsScanForward
-            //Stream is scanning forward.
-
-            //wmppsScanReverse
-            //Stream is scanning backward.
-
-            //wmppsBuffering
-            //Stream is being buffered.
-
-            //wmppsWaiting
-            //Waiting for streaming data.
-
-            //wmppsMediaEnded
-            //The end of the media item has been reached.
-
-            //wmppsTransitioning
-            //Preparing new media item.
-
-            //wmppsReady
-            //Ready to begin playing.
-
-            //wmppsReconnecting
-            //Trying to reconnect for streaming data.
-
-            //wmppsLast
-            //Last enumerated value.Not a valid state.
 
         }
 
@@ -226,7 +152,6 @@ namespace jukebox_assignment_SB
         {
             var frm_Setup_Window = new frm_Setup_Window();
             frm_Setup_Window.Show();
-
         }
 
         private void btn_About_Click(object sender, EventArgs e)
@@ -237,9 +162,10 @@ namespace jukebox_assignment_SB
 
         private void track_timer_Tick(object sender, EventArgs e)
         {
-            //track_timer.Enabled = true;
+            //start timer and then stop after interval of 3 secs
             track_timer.Start();
             track_timer.Stop();
+            //call track playing method again after time interval
             track_playing();
         }
     }
