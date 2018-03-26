@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;  //include system.io classes for reading + writing input/output
+using MyDialogs; //for the input box
 
 namespace jukebox_assignment_SB
 {
@@ -25,7 +26,7 @@ namespace jukebox_assignment_SB
         string configPath = Directory.GetCurrentDirectory();
 
         //save bool
-        bool bool_Requires_Saving;
+        bool bool_Requires_Saving = false;
 
         //int selector - to carry the index values 
         Int16 prev_next = 0;
@@ -37,7 +38,7 @@ namespace jukebox_assignment_SB
         private void frm_Setup_Window_Load(object sender, EventArgs e)
         {
 
-            StreamReader myInputStream = File.OpenText(configPath + "Config.txt");
+            StreamReader myInputStream = File.OpenText(configPath + "\\Config\\Config.txt");
 
             //capture first line of data from the config file
             num_genres = Convert.ToInt16(myInputStream.ReadLine());
@@ -68,8 +69,7 @@ namespace jukebox_assignment_SB
 
             //starting with first array - disable ability to go backwards
             btn_Genre_Previous.Enabled = false;
-
-
+            
             myInputStream.Close();
 
         }
@@ -179,7 +179,8 @@ namespace jukebox_assignment_SB
                 //switch on the neccessity to save
                 bool_Requires_Saving = true;
             }
-            else {
+            else
+            {
                 MessageBox.Show("You must Select an item to Copy.");
             }
             
@@ -205,9 +206,10 @@ namespace jukebox_assignment_SB
 
         private void btn_Delete_Genre_Track_Click(object sender, EventArgs e)
         {
-            if (lst_Imported_Tracks.SelectedItems.Count >= 1)
+            //demonstrates deletion of any playlist item.
+            if (lst_Playlist.SelectedItems.Count > 0)
             {
-                lst_Imported_Tracks.Items.Remove(lst_Imported_Tracks.SelectedItem);
+                lst_Playlist.Items.Remove(lst_Playlist.SelectedItem);
                 //switch on the neccessity to save
                 bool_Requires_Saving = true;
             }
@@ -218,29 +220,80 @@ namespace jukebox_assignment_SB
             
         }
 
-        private void txt_Genre_Title_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btn_Genre_Add_Click(object sender, EventArgs e)
         {
+            string new_genre_name;
+            new_genre_name = My_Dialogs.InputBox("Please enter the new 'Genre Title'.");
+
+            //trap user in endless onslaught of data input, until they give up and enter text
+            while ((btn_Genre_Add.DialogResult == DialogResult.Cancel) || (new_genre_name == ""))
+            {
+                MessageBox.Show("You must give the Genre a title!");
+                new_genre_name = My_Dialogs.InputBox("Please enter the new 'Genre Title'.");
+            }
+            //if string isnt empty and the ok is pressed add new genre
+            if ((new_genre_name.Length > 0) && (btn_Genre_Add.DialogResult == DialogResult.OK))
+            {
+                MessageBox.Show("You must give the Genre a title!");
+            }
+
+            //add a genre
+            num_genres++;
+            //clear playlist
+            lst_Playlist.Items.Clear();
+            //enter new title
+            txt_Genre_Title2.Text = new_genre_name;
+
 
         }
 
         private void btn_Genre_Delete_Click(object sender, EventArgs e)
         {
-            if (lst_Playlist.SelectedItems.Count < 1)
+            //DialogResult - msdn.microsoft.com/en-us/library/system.windows.forms.form.dialogresult(v=vs.110).aspx
+            DialogResult dialogResult = MessageBox.Show("Deleting the Genre will remove ALL of its tracks from your computer." +
+                    "                                    Do you wish to continue??", // some formatting
+                                                        "Warning!", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("you Havent selected an item, select one to continue");
+                //delete genre, perhaps use search
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //returns to setup window
             }
         }
 
         private void btn_Setup_OK_Click(object sender, EventArgs e)
         {
+            //upon selecting the ok button - save new configuration file
             if (bool_Requires_Saving == true)
             {
-                
+
+                //DialogResult - msdn.microsoft.com/en-us/library/system.windows.forms.form.dialogresult(v=vs.110).aspx
+                DialogResult dialogResult = MessageBox.Show("You have made changes to the configuration, do you wish to save them?",
+                                                            "Warning.", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    //writeline in a new section to the config.txt
+                    //definitely a save feature here that write lines into the right place
+
+                    //saves changes, returns user back to jukebox. this.Close();
+                    //on form load, need to create the config file.
+                    StreamWriter myOutputStream = File.CreateText(configPath + "\\Config\\Config.txt");
+
+                    for (int i = 0; i <= 10; i++)
+                    {
+                        myOutputStream.WriteLine(i.ToString());
+                    }
+
+                    myOutputStream.Close(); //close StreamWriter stream before using StreamReader
+
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    //if user wants to cancel and return to media player, close without saving
+                    this.Close();
+                }
             }
             else if (bool_Requires_Saving == false)
             {
@@ -252,7 +305,26 @@ namespace jukebox_assignment_SB
         {
             if (bool_Requires_Saving == true)
             {
-                
+                //DialogResult - msdn.microsoft.com/en-us/library/system.windows.forms.form.dialogresult(v=vs.110).aspx
+                DialogResult dialogResult = MessageBox.Show("You have made changes to the configuration, do you wish to save them?", 
+                                                            "Warning.", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    //saves changes, returns user back to jukebox. this.Close();
+                    //on form load, need to create the config file.
+                    StreamWriter myOutputStream = File.CreateText(configPath + "\\Config\\Config.txt");
+
+                    //write the config file to build the initial structure for our config file.
+                    myOutputStream.WriteLine("3"); //(number of genres)
+
+                    myOutputStream.Close(); //close StreamWriter stream before using StreamReader
+
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    //if user wants to cancel and return to media player, close without saving
+                    this.Close();
+                }
             }
             else if (bool_Requires_Saving == false)
             {

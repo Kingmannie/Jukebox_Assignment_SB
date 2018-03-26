@@ -63,6 +63,7 @@
     <Compile Include="frm_Setup_Window.Designer.cs">
       <DependentUpon>frm_Setup_Window.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyDialogs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frm_Jukebox.resx">

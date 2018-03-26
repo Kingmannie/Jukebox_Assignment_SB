@@ -39,7 +39,7 @@ namespace jukebox_assignment_SB
             myOutputStream.WriteLine("3"); //(number of genres)
             myOutputStream.WriteLine("1"); //(number of tracks in genre)
             myOutputStream.WriteLine("Short Electronic"); //(Genre name)
-            myOutputStream.WriteLine("New Life.mp3"); //(track name)
+            myOutputStream.WriteLine("New Life, test track.mp3"); //(track name)
             myOutputStream.WriteLine("1");
             myOutputStream.WriteLine("Classical");
             myOutputStream.WriteLine("Swan Lake.mp3");
@@ -51,7 +51,7 @@ namespace jukebox_assignment_SB
             
             myOutputStream.Close(); //close StreamWriter stream before using StreamReader
             
-            StreamReader myInputStream = File.OpenText(configPath + "Config.txt");
+            StreamReader myInputStream = File.OpenText(configPath + "\\Config\\Config.txt");
 
             //capture first line of data from the config file
             num_genres = Convert.ToInt16(myInputStream.ReadLine());
@@ -109,8 +109,16 @@ namespace jukebox_assignment_SB
 
         private void lst_Genre_List_DoubleClick(object sender, EventArgs e)
         {
-            //add selected genre item to playlist
-            lst_Playlist.Items.Add(lst_Genre_List.SelectedItem);
+
+            if (lst_Genre_List.SelectedItems.Count > 0)
+            {
+                //add selected genre item to playlist
+                lst_Playlist.Items.Add(lst_Genre_List.SelectedItem);
+            }
+            else {
+                MessageBox.Show("You must Select a track to Transfer.!");
+            }
+
             //initiate the track playing method
             track_playing();
         }
@@ -135,13 +143,13 @@ namespace jukebox_assignment_SB
         {
             if (media_player.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
-                //track is armed timer off
+                //track is armed & timer off
                 isPlaying = true;
                 track_timer.Enabled = false;
             }
             if (media_player.playState == WMPLib.WMPPlayState.wmppsStopped)
             {
-                //when track stops enable timer sequence
+                //when track stops - enable timer sequence
                 isPlaying = false;
                 track_timer.Enabled = true;
             }

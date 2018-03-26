@@ -181,7 +181,6 @@
             this.txt_Genre_Title2.ReadOnly = true;
             this.txt_Genre_Title2.Size = new System.Drawing.Size(264, 27);
             this.txt_Genre_Title2.TabIndex = 2;
-            this.txt_Genre_Title2.TextChanged += new System.EventHandler(this.txt_Genre_Title_TextChanged);
             // 
             // lbl_Genre
             // 
