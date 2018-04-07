@@ -14,6 +14,7 @@ namespace jukebox_assignment_SB
 {
     public partial class frm_Setup_Window : Form
     {
+        //Simon Browne 2018 - Assignment 2 Jukebox, b7033055
         //NOTE - declaring similar globals to original form
 
         //initialise listbox array globally
@@ -236,14 +237,15 @@ namespace jukebox_assignment_SB
             {
                 MessageBox.Show("You must give the Genre a title!");
             }
-
+            
             //add a genre
             num_genres++;
-            //clear playlist
+            //clear current playlist & title
             lst_Playlist.Items.Clear();
-            //enter new title
-            txt_Genre_Title2.Text = new_genre_name;
+            txt_Genre_Title2.Clear();
 
+            //enter new title from new index
+            txt_Genre_Title2.Text = new_genre_name;
 
         }
 
@@ -255,7 +257,9 @@ namespace jukebox_assignment_SB
                                                         "Warning!", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                //delete genre, perhaps use search
+                //clear current playlist & title - simulate delete
+                lst_Playlist.Items.Clear();
+                txt_Genre_Title2.Clear();
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -274,19 +278,30 @@ namespace jukebox_assignment_SB
                                                             "Warning.", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
+                    //*******************************************************************
                     //writeline in a new section to the config.txt
                     //definitely a save feature here that write lines into the right place
+                    //saves changes, returns user back to jukebox.
+                    //********************************************************************
 
-                    //saves changes, returns user back to jukebox. this.Close();
-                    //on form load, need to create the config file.
+                    //output stream for changes
                     StreamWriter myOutputStream = File.CreateText(configPath + "\\Config\\Config.txt");
 
-                    for (int i = 0; i <= 10; i++)
+                    //write the config file to build the initial structure for our config file.
+                    myOutputStream.WriteLine(num_genres); //(add new number of genres)
+                    //write the title
+                    myOutputStream.WriteLine(txt_Genre_Title2.Text); //(add new number of genres)
+                    //writes the num of tracks = lst_Playlist.Items.Count
+                    myOutputStream.WriteLine(lst_Playlist.Items.Count); // 1- to give the number of tracks
+                    //for loop to iterate through the tracks transferred to the new genre
+                    for (int track = 0; track < lst_Playlist.Items.Count; track++)//loop to cycle through tracks
                     {
-                        myOutputStream.WriteLine(i.ToString());
+                        myOutputStream.WriteLine(lst_Playlist.Items[track].ToString());
                     }
 
                     myOutputStream.Close(); //close StreamWriter stream before using StreamReader
+
+                    this.Close();
 
                 }
                 else if (dialogResult == DialogResult.No)
@@ -308,16 +323,26 @@ namespace jukebox_assignment_SB
                 //DialogResult - msdn.microsoft.com/en-us/library/system.windows.forms.form.dialogresult(v=vs.110).aspx
                 DialogResult dialogResult = MessageBox.Show("You have made changes to the configuration, do you wish to save them?", 
                                                             "Warning.", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                if (dialogResult == DialogResult.Yes)  //if yes save changes
                 {
-                    //saves changes, returns user back to jukebox. this.Close();
-                    //on form load, need to create the config file.
+                    //output stream for changes
                     StreamWriter myOutputStream = File.CreateText(configPath + "\\Config\\Config.txt");
 
                     //write the config file to build the initial structure for our config file.
-                    myOutputStream.WriteLine("3"); //(number of genres)
+                    myOutputStream.WriteLine(num_genres); //(add new number of genres)
+                    //write the title
+                    myOutputStream.WriteLine(txt_Genre_Title2.Text); //(add new number of genres)
+                    //writes the num of tracks = lst_Playlist.Items.Count
+                    myOutputStream.WriteLine(lst_Playlist.Items.Count); // 1- to give the number of tracks
+                    //for loop to iterate through the tracks transferred to the new genre
+                    for (int track = 0; track < lst_Playlist.Items.Count; track++)//loop to cycle through tracks
+                    {
+                        myOutputStream.WriteLine(lst_Playlist.Items[track].ToString()); 
+                    }
 
-                    myOutputStream.Close(); //close StreamWriter stream before using StreamReader
+                    myOutputStream.Close(); //close StreamWriter
+
+                    this.Close();
 
                 }
                 else if (dialogResult == DialogResult.No)
@@ -326,7 +351,7 @@ namespace jukebox_assignment_SB
                     this.Close();
                 }
             }
-            else if (bool_Requires_Saving == false)
+            else if (bool_Requires_Saving == false) //simply close without saving
             {
                 this.Close();
             }

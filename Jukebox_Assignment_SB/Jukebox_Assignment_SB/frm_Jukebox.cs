@@ -18,6 +18,7 @@ namespace jukebox_assignment_SB
             InitializeComponent();
         }
 
+        //Simon Browne 2018 - Assignment 2 Jukebox, b7033055
         //initialise listbox array globally
         ListBox[] Genre_List;
 
